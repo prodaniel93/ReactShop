@@ -19,6 +19,30 @@ function App() {
         className='main-bg'
         style={{ backgroundImage: 'url(' + bg + ')' }}
       ></div>
+
+      {/* 상품 레이아웃 3개 */}
+      <div className='container'>
+        <div className='row'>
+          <div className='col-md-4'>
+            <img
+              src={process.env.PUBLIC_URL + '/image/shoes1.jpg'}
+              width='80%'
+            />
+            <h4>상품명</h4>
+            <p>상품설명</p>
+          </div>
+          <div className='col-md-4'>
+            <img src='/image/shoes2.jpg' width='80%' />
+            <h4>상품명</h4>
+            <p>상품설명</p>
+          </div>
+          <div className='col-md-4'>
+            <img src='/image/shoes3.jpg' width='80%' />
+            <h4>상품명</h4>
+            <p>상품설명</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
