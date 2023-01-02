@@ -24,31 +24,27 @@ function App() {
         style={{ backgroundImage: 'url(' + bg + ')' }}
       ></div>
 
-      {/* 상품 레이아웃 3개 */}
+      {/* 상품 레이아웃 */}
       <div className='container'>
         <div className='row'>
-          <div className='col-md-4'>
-            <img
-              src={process.env.PUBLIC_URL + '/image/shoes1.jpg'}
-              width='80%'
-            />
-            <h4>{shoesData[0].title}</h4>
-            <p>KRW {shoesData[0].price}</p>
-          </div>
-
-          <div className='col-md-4'>
-            <img src='/image/shoes2.jpg' width='80%' />
-            <h4>{shoes[1].title}</h4>
-            <p>KRW {shoesData[1].price}</p>
-          </div>
-
-          <div className='col-md-4'>
-            <img src='/image/shoes3.jpg' width='80%' />
-            <h4>{shoesData[2].title}</h4>
-            <p>KRW {shoesData[2].price}</p>
-          </div>
+          {shoes.map(function (a, i) {
+            return <ShoesCard shoes={shoes[i]} i={i + 1}></ShoesCard>;
+          })}
         </div>
       </div>
+    </div>
+  );
+}
+
+function ShoesCard(props) {
+  return (
+    <div className='col-md-4'>
+      <img
+        src={process.env.PUBLIC_URL + '/image/shoes' + props.i + '.jpg'}
+        width='80%'
+      />
+      <h4>{props.shoes.title}</h4>
+      <p>KRW {props.shoes.price}</p>
     </div>
   );
 }
