@@ -1,8 +1,12 @@
 import './App.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import bg from './img/bg.png';
+import { useState } from 'react';
+import shoesData from './data.js';
 
 function App() {
+  let [shoes] = useState(shoesData);
+
   return (
     <div className='App'>
       <Navbar bg='light' variant='light'>
@@ -28,18 +32,20 @@ function App() {
               src={process.env.PUBLIC_URL + '/image/shoes1.jpg'}
               width='80%'
             />
-            <h4>상품명</h4>
-            <p>상품설명</p>
+            <h4>{shoesData[0].title}</h4>
+            <p>KRW {shoesData[0].price}</p>
           </div>
+
           <div className='col-md-4'>
             <img src='/image/shoes2.jpg' width='80%' />
-            <h4>상품명</h4>
-            <p>상품설명</p>
+            <h4>{shoes[1].title}</h4>
+            <p>KRW {shoesData[1].price}</p>
           </div>
+
           <div className='col-md-4'>
             <img src='/image/shoes3.jpg' width='80%' />
-            <h4>상품명</h4>
-            <p>상품설명</p>
+            <h4>{shoesData[2].title}</h4>
+            <p>KRW {shoesData[2].price}</p>
           </div>
         </div>
       </div>
