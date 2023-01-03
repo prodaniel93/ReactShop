@@ -5,9 +5,10 @@ import { useState } from 'react';
 import shoesData from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './routes/Detail.js';
+import axios from 'axios';
 
 function App() {
-  let [shoes] = useState(shoesData);
+  let [shoes, setShoes] = useState(shoesData);
   let navigate = useNavigate();
 
   return (
@@ -30,8 +31,6 @@ function App() {
             >
               Detail
             </Nav.Link>
-            <Link to='/'>홈으로</Link>
-            <Link to='/detail'>상세페이지</Link>
           </Nav>
         </Container>
       </Navbar>
@@ -41,7 +40,10 @@ function App() {
           path='/'
           element={
             <>
-              <div className='main-bg' style={{ backgroundImage: 'url(' + bg + ')' }}></div>
+              <div
+                className='main-bg'
+                style={{ backgroundImage: 'url(' + bg + ')' }}
+              ></div>
 
               {/* 상품 레이아웃 */}
               <div className='container'>
@@ -51,6 +53,24 @@ function App() {
                   })}
                 </div>
               </div>
+              <button
+                onClick={() => {
+                  axios
+                    .get('https://codingapple1.github.io/shop/data3.json')
+                    .then((result) => {
+                      // shoes에 가져온 데이터 추가
+                      let copy = [...shoes, ...result.data];
+                      setShoes(copy);
+                    })
+                    .catch(() => {
+                      console.log('실패한 경우임');
+                    });
+
+                  axios.post('/safdfas', { name: 'Kim' });
+                }}
+              >
+                더보기
+              </button>
             </>
           }
         />
@@ -64,7 +84,10 @@ function App() {
 function ShoesCard(props) {
   return (
     <div className='col-md-4'>
-      <img src={process.env.PUBLIC_URL + '/image/shoes' + props.i + '.jpg'} width='80%' />
+      <img
+        src={process.env.PUBLIC_URL + '/image/shoes' + props.i + '.jpg'}
+        width='80%'
+      />
       <h4>{props.shoes.title}</h4>
       <p>{props.shoes.price}</p>
     </div>
