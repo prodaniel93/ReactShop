@@ -5,7 +5,6 @@ import { useState } from 'react';
 import shoesData from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './routes/Detail.js';
-import axios from 'axios';
 
 function App() {
   let [shoes, setShoes] = useState(shoesData);
@@ -53,24 +52,6 @@ function App() {
                   })}
                 </div>
               </div>
-              <button
-                onClick={() => {
-                  axios
-                    .get('https://codingapple1.github.io/shop/data3.json')
-                    .then((result) => {
-                      // shoes에 가져온 데이터 추가
-                      let copy = [...shoes, ...result.data];
-                      setShoes(copy);
-                    })
-                    .catch(() => {
-                      console.log('실패한 경우임');
-                    });
-
-                  axios.post('/safdfas', { name: 'Kim' });
-                }}
-              >
-                더보기
-              </button>
             </>
           }
         />
