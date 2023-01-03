@@ -3,21 +3,21 @@ let shoesData = [
     id: 0,
     title: 'White and Black',
     content: 'Born in France',
-    price: 120000,
+    price: 'KRW 20000',
   },
 
   {
     id: 1,
     title: 'Red Knit',
     content: 'Born in Seoul',
-    price: 110000,
+    price: 'KRW 110000',
   },
 
   {
     id: 2,
     title: 'Grey Yordan',
     content: 'Born in the States',
-    price: 130000,
+    price: 'KRW 130000',
   },
 ];
 

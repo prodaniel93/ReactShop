@@ -41,10 +41,7 @@ function App() {
           path='/'
           element={
             <>
-              <div
-                className='main-bg'
-                style={{ backgroundImage: 'url(' + bg + ')' }}
-              ></div>
+              <div className='main-bg' style={{ backgroundImage: 'url(' + bg + ')' }}></div>
 
               {/* 상품 레이아웃 */}
               <div className='container'>
@@ -57,22 +54,9 @@ function App() {
             </>
           }
         />
-        <Route path='/detail' element={<Detail />} />
-
-        <Route path='/about' element={<About />}>
-          <Route path='member' element={<div>멤버임</div>} />
-          <Route path='location' element={<div>위치정보임</div>} />
-        </Route>
+        {/* url 파라미터 */}
+        <Route path='/detail/:id' element={<Detail shoes={shoes} />} />
       </Routes>
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <div>
-      <h4>회사정보임</h4>
-      <Outlet></Outlet>
     </div>
   );
 }
@@ -80,12 +64,9 @@ function About() {
 function ShoesCard(props) {
   return (
     <div className='col-md-4'>
-      <img
-        src={process.env.PUBLIC_URL + '/image/shoes' + props.i + '.jpg'}
-        width='80%'
-      />
+      <img src={process.env.PUBLIC_URL + '/image/shoes' + props.i + '.jpg'} width='80%' />
       <h4>{props.shoes.title}</h4>
-      <p>KRW {props.shoes.price}</p>
+      <p>{props.shoes.price}</p>
     </div>
   );
 }
