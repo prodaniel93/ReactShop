@@ -5,6 +5,7 @@ import { useState, createContext } from 'react';
 import shoesData from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './routes/Detail.js';
+import Cart from './routes/Cart.js';
 
 export let Context1 = createContext();
 
@@ -68,6 +69,8 @@ function App() {
             </Context1.Provider>
           }
         />
+
+        <Route path='/cart' element={<Cart />} />
       </Routes>
     </div>
   );
