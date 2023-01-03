@@ -2,10 +2,12 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 let YellowBtn = styled.button`
-  background: yellow;
-  color: black;
+  background: ${(props) => props.bg};
+  color: ${(props) => (props.bg == 'blue' ? 'white' : 'black')};
   padding: 10px;
 `;
+
+let NewBtn = styled.button(YellowBtn);
 
 function Detail(props) {
   let { id } = useParams();
@@ -15,7 +17,9 @@ function Detail(props) {
 
   return (
     <div className='container'>
-      <YellowBtn>버튼</YellowBtn>
+      <YellowBtn bg='blue'>버튼</YellowBtn>
+      <YellowBtn bg='orange'>버튼</YellowBtn>
+      <NewBtn>버튼2</NewBtn>
 
       <div className='row'>
         <div className='col-md-6'>
