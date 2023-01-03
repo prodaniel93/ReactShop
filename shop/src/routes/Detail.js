@@ -13,6 +13,17 @@ function Detail(props) {
       clearTimeout(timer);
     };
   }, []);
+  let [pageOpacity, setPageOpacity] = useState();
+
+  useEffect(() => {
+    let timer2 = setTimeout(() => {
+      setPageOpacity('end');
+    }, 10);
+    return () => {
+      clearTimeout(timer2);
+      setPageOpacity('');
+    };
+  }, []);
 
   let { id } = useParams();
   let findProduct = props.shoes.find(function (x) {
@@ -22,7 +33,7 @@ function Detail(props) {
   let [tab, setTab] = useState(0);
 
   return (
-    <div className='container'>
+    <div className={`container start ${pageOpacity}`}>
       {alert == true ? (
         <div className='alert alert-warning'>2초이내 구매시 할인</div>
       ) : null}
@@ -81,13 +92,24 @@ function Detail(props) {
 
 // props 대신 { tab } 사용가능
 function TabContent({ tab }) {
-  if (tab == 0) {
-    return <div>내용0</div>;
-  } else if (tab == 1) {
-    return <div>내용1</div>;
-  } else {
-    return <div>내용2</div>;
-  }
+  let [fade, setFade] = useState();
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setFade('end');
+    }, 10);
+
+    return () => {
+      clearTimeout(timer);
+      setFade('');
+    };
+  }, [tab]);
+
+  return (
+    <div className={`start ${fade}`}>
+      {[<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][tab]}
+    </div>
+  );
 }
 
 export default Detail;
