@@ -1,9 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
 import { Nav } from 'react-bootstrap';
+import { Context1 } from './../App.js';
 
 function Detail(props) {
+  let { 재고, shoes } = useContext(Context1);
+
+  let { id } = useParams();
+  let findProduct = props.shoes.find(function (x) {
+    return x.id == id;
+  });
+  let [alert, setAlert] = useState(true);
+  let [tab, setTab] = useState(0);
+
   useEffect(() => {
     let timer = setTimeout(() => {
       setAlert(false);
@@ -25,18 +34,13 @@ function Detail(props) {
     };
   }, []);
 
-  let { id } = useParams();
-  let findProduct = props.shoes.find(function (x) {
-    return x.id == id;
-  });
-  let [alert, setAlert] = useState(true);
-  let [tab, setTab] = useState(0);
-
   return (
     <div className={`container start ${pageOpacity}`}>
       {alert == true ? (
         <div className='alert alert-warning'>2초이내 구매시 할인</div>
       ) : null}
+
+      {재고[0]}
 
       <div className='row'>
         <div className='col-md-6'>

@@ -1,13 +1,17 @@
 import './App.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import bg from './img/bg.png';
-import { useState } from 'react';
+import { useState, createContext } from 'react';
 import shoesData from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './routes/Detail.js';
 
+export let Context1 = createContext();
+
 function App() {
   let [shoes, setShoes] = useState(shoesData);
+  let [재고] = useState([10, 11, 12]);
+
   let navigate = useNavigate();
 
   return (
@@ -56,7 +60,14 @@ function App() {
           }
         />
         {/* url 파라미터 */}
-        <Route path='/detail/:id' element={<Detail shoes={shoes} />} />
+        <Route
+          path='/detail/:id'
+          element={
+            <Context1.Provider value={{ 재고 }}>
+              <Detail shoes={shoes} />
+            </Context1.Provider>
+          }
+        />
       </Routes>
     </div>
   );
