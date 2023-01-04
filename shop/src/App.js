@@ -1,7 +1,7 @@
 import './App.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import bg from './img/bg.png';
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import shoesData from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './routes/Detail.js';
@@ -10,9 +10,12 @@ import Cart from './routes/Cart.js';
 export let Context1 = createContext();
 
 function App() {
+  useEffect(() => {
+    localStorage.setItem('watched', JSON.stringify([]));
+  });
+
   let [shoes, setShoes] = useState(shoesData);
   let [재고] = useState([10, 11, 12]);
-
   let navigate = useNavigate();
 
   return (
@@ -53,7 +56,9 @@ function App() {
               <div className='container'>
                 <div className='row'>
                   {shoes.map(function (a, i) {
-                    return <ShoesCard shoes={shoes[i]} i={i + 1}></ShoesCard>;
+                    return (
+                      <ShoesCard shoes={shoes[i]} i={i + 1} key={i}></ShoesCard>
+                    );
                   })}
                 </div>
               </div>
