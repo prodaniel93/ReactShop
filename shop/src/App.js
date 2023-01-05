@@ -6,6 +6,8 @@ import shoesData from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './routes/Detail.js';
 import Cart from './routes/Cart.js';
+import { useQuery } from 'react-query';
+import axios from 'axios';
 
 export let Context1 = createContext();
 
@@ -17,6 +19,17 @@ function App() {
   let [shoes, setShoes] = useState(shoesData);
   let [재고] = useState([10, 11, 12]);
   let navigate = useNavigate();
+
+  let result = useQuery('작명', () => {
+    return (
+      axios.get('http://codingapple1.github.io/userdata.json').then((a) => {
+        console.log('요청됨');
+        return a.data;
+      }),
+      { staleTime: 2000 }
+      // refetch 시간설정 할 수 있음.
+    );
+  });
 
   return (
     <div className='App'>
@@ -38,6 +51,11 @@ function App() {
             >
               Detail
             </Nav.Link>
+          </Nav>
+          <Nav className='ms-auto'>
+            {result.isLoading && '로딩중'}
+            {result.error && '에러남'}
+            {result.data && result.data.name}
           </Nav>
         </Container>
       </Navbar>
